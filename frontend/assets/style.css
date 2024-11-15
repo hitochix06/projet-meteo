@@ -1,0 +1,118 @@
+.card-3d {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-3d:hover {
+    transform: 
+        perspective(1500px) 
+        rotateX(10deg) 
+        rotateY(10deg) 
+        translateZ(30px);
+    box-shadow: 
+        20px 20px 50px rgba(0,0,0,0.15),
+        -20px -20px 50px rgba(255,255,255,0.8),
+        inset 0 0 20px rgba(255,255,255,0.5);
+}
+
+.card-header-3d {
+    transform: translateZ(20px);
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,1),
+        rgba(240,240,240,0.8)
+    ) !important;
+}
+
+.station-card {
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Effet de brillance */
+.station-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255,255,255,0.3),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+}
+
+/* Animation de l'effet de brillance */
+@keyframes shine {
+    0% {
+        transform: rotate(45deg) translateY(-100%);
+    }
+    100% {
+        transform: rotate(45deg) translateY(100%);
+    }
+}
+
+/* Effet de profondeur pour les éléments internes */
+.card-3d .card-body > div {
+    transform: translateZ(10px);
+    transition: transform 0.3s ease;
+}
+
+/* Effet de parallaxe au survol */
+.card-3d:hover .card-header-3d {
+    transform: translateZ(40px);
+}
+
+.card-3d:hover .card-body > div:nth-child(1) {
+    transform: translateZ(30px);
+}
+
+.card-3d:hover .card-body > div:nth-child(2) {
+    transform: translateZ(20px);
+}
+
+.card-3d:hover .card-body > div:nth-child(3) {
+    transform: translateZ(10px);
+}
+
+/* Effet de glassmorphism */
+.station-card {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+/* Ombre portée dynamique */
+.card-3d::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,0.4) 0%,
+        rgba(255,255,255,0) 100%
+    );
+    pointer-events: none;
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card-3d:hover::after {
+    opacity: 1;
+}
+
+body {
+    background-color: #f1f1f1;
+}
